@@ -19,8 +19,9 @@ This project analyzes global COVID-19 data to understand trends in confirmed cas
 - Google Colab
 
 ## 📁 Files in Repository
-- `Covid_19_Data_Analysis.ipynb. txt` → Clean code (no output)
+- `Covid_19_Data_Analysis.ipynb.txt` → Clean code (no output)
 - `index.html` → Full project with output & charts
+- country_wise_latest.csv
 
 ## 🌐 Live Project
 👉 [Click here to view project](https://your-username.github.io/Covid-19-Data-Analysis/)
