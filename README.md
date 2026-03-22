@@ -1,6 +1,10 @@
-# Covid-19-Data-Analysis
+#  🦠 COVID-19 Data Analysis
 A data analysis project using Python to explore global COVID-19 trends with visualizations and insights.
-# 🦠 COVID-19 Data Analysis
+
+
+## 🌐 Live Project
+👉 [Click here to view project](https://anju3436.github.io/Covid-19-Data-Analysis/)
+
 
 ## 📌 Project Overview
 This project analyzes global COVID-19 data to understand trends in confirmed cases, deaths, recoveries, and active cases across different countries.
@@ -22,9 +26,6 @@ This project analyzes global COVID-19 data to understand trends in confirmed cas
 - `Covid_19_Data_Analysis.ipynb.txt` → Clean code (no output)
 - `index.html` → Full project with output & charts
 - `country_wise_latest.csv` → Original Data Set
-
-## 🌐 Live Project
-👉 [Click here to view project](https://your-username.github.io/Covid-19-Data-Analysis/)
 
 ## 📈 Insights
 - Top countries have significantly higher confirmed cases
