@@ -1,0 +1,334 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **COVID-19 DATA ANALYSIS REPORT**"
+      ],
+      "metadata": {
+        "id": "Fz-Uf3XLdY9K"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **INTRODUCTION**\n",
+        "\n",
+        "The COVID-19 pandemic has significantly impacted countries across the globe ,affecting millions of people and challenging healthcare systems. This project aims to analyze global COVID-19 data to understand the distribution of confirmed cases , deaths , recoveries , and WHO regions."
+      ],
+      "metadata": {
+        "id": "vdJwpMVleJ0g"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **IMPORT LIBRARIES**"
+      ],
+      "metadata": {
+        "id": "43p-sFj6e6ay"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "bQnLDfQuNEgt"
+      },
+      "outputs": [],
+      "source": [
+        "from google.colab import files\n",
+        "uploaded = files.upload()"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns\n"
+      ],
+      "metadata": {
+        "id": "sPcdLRDyPWBt"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **LOAD DATASET**"
+      ],
+      "metadata": {
+        "id": "uvwsUKsWfEQ4"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df = pd.read_csv(\"country_wise_latest.csv.csv\")\n",
+        "df.head()"
+      ],
+      "metadata": {
+        "id": "tsL3Rs5DPzMA"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **DATA UNDERSTANDING**"
+      ],
+      "metadata": {
+        "id": "IWAyc_JrfMd4"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.info()\n",
+        "df.describe()"
+      ],
+      "metadata": {
+        "id": "XMo0aLlXQDcZ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **DATA CLEANING**"
+      ],
+      "metadata": {
+        "id": "Uq5haaktfUlc"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.columns = df.columns.str.strip()\n",
+        "df.fillna(0,inplace=True)\n",
+        "df.head()\n"
+      ],
+      "metadata": {
+        "id": "7kFxrpwJRd6S"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **COLUMN NAMES**"
+      ],
+      "metadata": {
+        "id": "xHSyahF9ffDb"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(df.columns)"
+      ],
+      "metadata": {
+        "id": "1do-cj1KUM2R"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **FILTER DATA FOR INDIA**"
+      ],
+      "metadata": {
+        "id": "e3gGiW3gf9WE"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.columns = df.columns.str.strip()\n",
+        "df.fillna(0,inplace=True)\n",
+        "india = df[df[\"Country/Region\"].str.strip()==\"India\"]\n",
+        "india.head()"
+      ],
+      "metadata": {
+        "id": "QsyqzPVTSomO"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **DATA VISUALIZATION**"
+      ],
+      "metadata": {
+        "id": "wNgSn80TgKhx"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "top10 = df.sort_values(by=\"Confirmed\",ascending=False).head(10)\n",
+        "\n",
+        "plt.figure(figsize=(10,5))\n",
+        "plt.bar(top10[\"Country/Region\"],top10[\"Confirmed\"])\n",
+        "plt.title(\"Top 10 Countries with Confirmed Cases\")\n",
+        "plt.xticks(rotation=45)\n",
+        "plt.show()\n"
+      ],
+      "metadata": {
+        "id": "jEe5AgPNSveF"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "top10 = df.sort_values(by=\"Deaths\",ascending=False).head(10)\n",
+        "plt.figure(figsize=(10,5))\n",
+        "plt.bar(top10[\"Country/Region\"],top10[\"Deaths\"])\n",
+        "plt.title(\"Top 10 Countries with Deaths\")\n",
+        "plt.xticks(rotation=45)\n",
+        "plt.show()\n"
+      ],
+      "metadata": {
+        "id": "0Xvy1WTxVghs"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "top5 = df.sort_values(by=\"Recovered\",ascending=False).head(10)\n",
+        "plt.figure(figsize=(10,5))\n",
+        "plt.bar(top5[\"Country/Region\"],top5[\"Recovered\"])\n",
+        "plt.title(\"Top 10 Countries with Recovered Cases\")\n",
+        "plt.xlabel(\"Countries\")\n",
+        "plt.ylabel(\"Recovered Cases\")\n",
+        "plt.show()"
+      ],
+      "metadata": {
+        "id": "XqwrEiXHV7eI"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "top5=df.sort_values(by=\"Confirmed\",ascending=False).head(10)\n",
+        "plt.figure(figsize=(10,5))\n",
+        "plt.pie(top5[\"Confirmed\"],labels=top5[\"Country/Region\"],autopct='%1.1f%%')\n",
+        "plt.title(\"Covid Cases Distribution (Top 5)\")\n",
+        "plt.show()"
+      ],
+      "metadata": {
+        "id": "wdzsZBwKWU6r"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "top10 = df.sort_values(by=\"Confirmed\",ascending=False).head(10)\n",
+        "plt.figure(figsize=(10,5))\n",
+        "plt.bar(top10[\"Country/Region\"],top10[\"Active\"])\n",
+        "plt.title(\"Top 10 Countries with Active Cases\")\n",
+        "plt.xticks(rotation=45)\n",
+        "plt.show()"
+      ],
+      "metadata": {
+        "id": "l41uqVJmXV3e"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "region = df.groupby(\"WHO Region\")[\"Confirmed\"].sum()\n",
+        "region.plot(kind=\"bar\")\n",
+        "plt.title(\"Cases by WHO Region\")\n",
+        "plt.xticks(rotation=45)\n",
+        "plt.show()\n"
+      ],
+      "metadata": {
+        "id": "jIgHr3XhXyYh"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **INSIGHTS**\n",
+        "\n",
+        "*   The United States has the highest number of confirmed COVID-19 cases.\n",
+        "*   Countries like India and Brazil also shows significant case counts.\n",
+        "\n",
+        "*   Death rates are higher in countries with high confirmed cases.\n",
+        "*  Active caces indicate ongoing spread in multiple regions.\n",
+        "\n",
+        "*   WHO region analysis shows that some regions are more affected than others.\n",
+        "\n",
+        "\n",
+        "*   US country has the top active cases.\n",
+        "*   Recovery rate varies significantly across regions.\n",
+        "\n",
+        "*   Countries with high \"one week % increase\" are experiencing rapid spread.\n",
+        "*   The dataset represents a sanpshot,not time-series data.\n",
+        "\n",
+        "\n",
+        "\n",
+        "*   Hence, analysis focuses more on comparison rather than trend prediction.\n"
+      ],
+      "metadata": {
+        "id": "g6EecOgfY21D"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **CONCLUSION**\n",
+        "\n",
+        "This analysis provides a comprehensive overview of the global impact of COVID-19 using country-wise and region-wise data. The findings reveal that the distribution of confirmed cases,deaths,and recoveries is highly uneven,with a small number of countries contributing to the overall case count. While higher confirmed cases are often associated with higher death counts, variations in recovery and fatality rates suggest differences in healthcare infrastructure and response strategies across countries. Additionally, the analysis of WHO regions highlights geographical disparities in the spread and severity of the pandemic. Since the dataset represents a snapshot in time rather than a time-series, the study focuses on comparative insights rather than trend analysis. Overall, the use of data visualization techniques enables a clearer understanding of the pandemic's global patterns and supports informed decision-making."
+      ],
+      "metadata": {
+        "id": "FAovSRgAbDkf"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "#"
+      ],
+      "metadata": {
+        "id": "zNIwUuq5fxys"
+      }
+    }
+  ]
+}
